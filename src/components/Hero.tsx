@@ -5,6 +5,7 @@ import { Github, Linkedin, Mail, Calendar, ArrowRight } from "lucide-react"
 import { SocialLink } from "@/types"
 import { useLanguage } from "@/context/LanguageContext"
 import { t, SupportedLanguage, TranslationDict } from "@/lib/utils"
+import Image from "next/image"
 
 const socialLinks: SocialLink[] = [
   {
@@ -116,11 +117,13 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             className="mx-auto mb-8 w-32 h-32 rounded-full overflow-hidden shadow-lg border-4 border-primary-400"
           >
-            <img
+            <Image
               src="/profile.png"
               alt="Profile picture of Johel Venegas"
               className="w-full h-full object-cover"
-              loading="lazy"
+              width={128}
+              height={128}
+              priority={false}
             />
           </motion.div>
 

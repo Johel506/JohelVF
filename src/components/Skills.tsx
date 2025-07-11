@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Code, Database, Cloud, Server, Cpu, Shield, Globe, Zap, Layers, Library, Monitor } from "lucide-react"
+import { Code, Database, Cloud, Zap, Layers, Library, Monitor } from "lucide-react"
 import { Skill } from "@/types"
 import { useLanguage } from "@/context/LanguageContext"
 import { t, SupportedLanguage, TranslationDict } from "@/lib/utils"
