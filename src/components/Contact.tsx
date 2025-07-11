@@ -4,8 +4,76 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { Mail, Phone, MapPin, Calendar, Send, MessageSquare } from "lucide-react"
 import { ContactForm } from "@/types"
+import { t, SupportedLanguage, TranslationDict } from "@/lib/utils"
+import { useLanguage } from "@/context/LanguageContext"
+
+const contactLabels: Record<SupportedLanguage, TranslationDict> = {
+  en: {
+    letsWork: "Let's Work Together",
+    ready: "Ready to discuss your next project? I'm available for backend development, system modernization, and DevOps consulting. Let's build something amazing together.",
+    getInTouch: "Get in Touch",
+    email: "Email",
+    phone: "Phone",
+    location: "Location",
+    schedule: "Schedule a Call",
+    availability: "Availability",
+    responseTime: "Response Time:",
+    timezone: "Timezone:",
+    projectType: "Project Type:",
+    within24: "Within 24 hours",
+    utc: "UTC-6 (Costa Rica)",
+    backendDevOps: "Backend, DevOps, Modernization",
+    sendMessage: "Send a Message",
+    name: "Name *",
+    emailField: "Email *",
+    company: "Company",
+    message: "Message *",
+    messagePlaceholder: "Tell me about your project or how I can help...",
+    send: "Send Message",
+    yes: "Yes",
+    preferred: "Preferred",
+    fullTimePositions: "Full-time positions",
+    contractWork: "Contract work",
+    remoteWork: "Remote work",
+    availableFor: "Available for",
+    timeZone: "Time zone",
+    directContact: "Direct Contact",
+  },
+  es: {
+    letsWork: "Trabajemos juntos",
+    ready: "¿Listo para hablar de tu próximo proyecto? Estoy disponible para desarrollo backend, modernización de sistemas y consultoría DevOps. Construyamos algo increíble juntos.",
+    getInTouch: "Contacto",
+    email: "Correo",
+    phone: "Teléfono",
+    location: "Ubicación",
+    schedule: "Agendar llamada",
+    availability: "Disponibilidad",
+    responseTime: "Tiempo de respuesta:",
+    timezone: "Zona horaria:",
+    projectType: "Tipo de proyecto:",
+    within24: "En menos de 24 horas",
+    utc: "UTC-6 (Costa Rica)",
+    backendDevOps: "Backend, DevOps, Modernización",
+    sendMessage: "Enviar mensaje",
+    name: "Nombre *",
+    emailField: "Correo *",
+    company: "Empresa",
+    message: "Mensaje *",
+    messagePlaceholder: "Cuéntame sobre tu proyecto o cómo puedo ayudar...",
+    send: "Enviar mensaje",
+    yes: "Sí",
+    preferred: "Preferido",
+    fullTimePositions: "Puestos de tiempo completo",
+    contractWork: "Trabajo por contrato",
+    remoteWork: "Trabajo remoto",
+    availableFor: "Disponible para",
+    timeZone: "Zona horaria",
+    directContact: "Contacto directo",
+  },
+}
 
 export default function Contact() {
+  const { language } = useLanguage()
   const [formData, setFormData] = useState<ContactForm>({
     name: "",
     email: "",
@@ -53,11 +121,10 @@ export default function Contact() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-heading mb-4">
-            Get In Touch
+            {t(contactLabels, language, "getInTouch")}
           </h2>
           <p className="text-lg text-body max-w-3xl mx-auto">
-            I&apos;m always interested in new opportunities and exciting projects. 
-            Let&apos;s discuss how we can work together to bring your ideas to life.
+            {t(contactLabels, language, "ready")}
           </p>
         </motion.div>
 
@@ -73,7 +140,7 @@ export default function Contact() {
             <div className="flex items-center gap-2 mb-6">
               <MessageSquare className="h-6 w-6 text-primary-600 dark:text-primary-400" />
               <h3 className="text-xl font-semibold text-heading">
-                Send a Message
+                {t(contactLabels, language, "sendMessage")}
               </h3>
             </div>
 
@@ -81,7 +148,7 @@ export default function Contact() {
               <div className="grid sm:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-heading mb-2">
-                    Name *
+                    {t(contactLabels, language, "name")}
                   </label>
                   <input
                     type="text"
@@ -91,12 +158,12 @@ export default function Contact() {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                    placeholder="Your name"
+                    placeholder={t(contactLabels, language, "name")}
                   />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-heading mb-2">
-                    Email *
+                    {t(contactLabels, language, "emailField")}
                   </label>
                   <input
                     type="email"
@@ -106,14 +173,14 @@ export default function Contact() {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                    placeholder="your.email@example.com"
+                    placeholder={t(contactLabels, language, "emailField")}
                   />
                 </div>
               </div>
 
               <div>
                 <label htmlFor="company" className="block text-sm font-medium text-heading mb-2">
-                  Company
+                  {t(contactLabels, language, "company")}
                 </label>
                 <input
                   type="text"
@@ -122,13 +189,13 @@ export default function Contact() {
                   value={formData.company}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                  placeholder="Your company (optional)"
+                  placeholder={t(contactLabels, language, "company")}
                 />
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-heading mb-2">
-                  Message *
+                  {t(contactLabels, language, "message")}
                 </label>
                 <textarea
                   id="message"
@@ -138,7 +205,7 @@ export default function Contact() {
                   required
                   rows={5}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
-                  placeholder="Tell me about your project or opportunity..."
+                  placeholder={t(contactLabels, language, "messagePlaceholder")}
                 />
               </div>
 
@@ -150,12 +217,12 @@ export default function Contact() {
                 {isSubmitting ? (
                   <>
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                    Sending...
+                    {t(contactLabels, language, "sending")}
                   </>
                 ) : (
                   <>
                     <Send className="h-4 w-4" />
-                    Send Message
+                    {t(contactLabels, language, "send")}
                   </>
                 )}
               </button>
@@ -166,7 +233,7 @@ export default function Contact() {
                   animate={{ opacity: 1, y: 0 }}
                   className="p-4 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-lg text-sm"
                 >
-                  Thank you! Your message has been sent successfully. I&apos;ll get back to you soon.
+                  {t(contactLabels, language, "successMessage")}
                 </motion.div>
               )}
 
@@ -176,7 +243,7 @@ export default function Contact() {
                   animate={{ opacity: 1, y: 0 }}
                   className="p-4 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded-lg text-sm"
                 >
-                  Sorry, there was an error sending your message. Please try again.
+                  {t(contactLabels, language, "errorMessage")}
                 </motion.div>
               )}
             </form>
@@ -193,13 +260,15 @@ export default function Contact() {
             {/* Direct Contact */}
             <div className="p-8 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
               <h3 className="text-xl font-semibold text-heading mb-6">
-                Direct Contact
+                {t(contactLabels, language, "directContact")}
               </h3>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <Mail className="h-5 w-5 text-primary-600 dark:text-primary-400" />
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Email</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {t(contactLabels, language, "email")}
+                    </p>
                     <a
                       href="mailto:johelvf506@gmail.com"
                       className="text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
@@ -212,7 +281,9 @@ export default function Contact() {
                 <div className="flex items-center gap-3">
                   <Phone className="h-5 w-5 text-primary-600 dark:text-primary-400" />
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Phone</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {t(contactLabels, language, "phone")}
+                    </p>
                     <a
                       href="tel:+50670226553"
                       className="text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
@@ -225,8 +296,12 @@ export default function Contact() {
                 <div className="flex items-center gap-3">
                   <MapPin className="h-5 w-5 text-primary-600 dark:text-primary-400" />
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Location</p>
-                    <p className="text-gray-900 dark:text-white">Costa Rica (UTC-6)</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {t(contactLabels, language, "location")}
+                    </p>
+                    <p className="text-gray-900 dark:text-white">
+                      {t(contactLabels, language, "utc")}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -237,44 +312,45 @@ export default function Contact() {
               <div className="flex items-center gap-2 mb-4">
                 <Calendar className="h-6 w-6 text-primary-600 dark:text-primary-400" />
                 <h3 className="text-xl font-semibold text-heading">
-                  Schedule a Call
+                  {t(contactLabels, language, "schedule")}
                 </h3>
               </div>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
-                Prefer to schedule a meeting? Book a time that works for you through my Calendly.
+                {t(contactLabels, language, "scheduleDescription")}
               </p>
               <button
                 onClick={handleScheduleCall}
                 className="btn-primary w-full flex items-center justify-center gap-2"
               >
                 <Calendar className="h-4 w-4" />
-                Book a Meeting
+                {t(contactLabels, language, "bookMeeting")}
               </button>
             </div>
 
             {/* Availability */}
             <div className="p-8 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
-              <h3 className="text-xl font-semibold text-heading mb-4">
-                Availability
+              <h3 className="text-xl font-semibold text-heading mb-4 flex items-center gap-2">
+                <Calendar className="h-5 w-5 text-primary-600 dark:text-primary-400" />
+                {t(contactLabels, language, "availability")}
               </h3>
-              <div className="space-y-3 text-sm text-gray-600 dark:text-gray-300">
-                <div className="flex justify-between">
-                  <span>Available for:</span>
-                  <span className="font-medium">Full-time positions</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Contract work:</span>
-                  <span className="font-medium">Yes</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Remote work:</span>
-                  <span className="font-medium">Preferred</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Time zone:</span>
-                  <span className="font-medium">UTC-6 (Costa Rica)</span>
-                </div>
-              </div>
+              <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-300">
+                <li className="flex items-center gap-2">
+                  <span className="font-medium min-w-[120px]">{t(contactLabels, language, "availableFor")}:</span>
+                  <span>{t(contactLabels, language, "fullTimePositions")}</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="font-medium min-w-[120px]">{t(contactLabels, language, "contractWork")}:</span>
+                  <span>{t(contactLabels, language, "yes")}</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="font-medium min-w-[120px]">{t(contactLabels, language, "remoteWork")}:</span>
+                  <span>{t(contactLabels, language, "preferred")}</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="font-medium min-w-[120px]">{t(contactLabels, language, "timeZone")}:</span>
+                  <span>{t(contactLabels, language, "utc")}</span>
+                </li>
+              </ul>
             </div>
           </motion.div>
         </div>

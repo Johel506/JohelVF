@@ -26,3 +26,12 @@ export function getInitials(name: string) {
     .join("")
     .toUpperCase()
 }
+
+export type SupportedLanguage = 'en' | 'es';
+
+export type TranslationDict = Record<string, string>;
+
+// Simple translation utility (to be used with context)
+export function t(dict: Record<string, TranslationDict>, lang: SupportedLanguage, key: string): string {
+  return dict[lang]?.[key] || dict['en']?.[key] || key;
+}

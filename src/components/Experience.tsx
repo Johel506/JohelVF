@@ -4,45 +4,113 @@ import { motion } from "framer-motion"
 import { Calendar, MapPin, Building, Code } from "lucide-react"
 import { Experience as ExperienceType } from "@/types"
 import { formatDate } from "@/lib/utils"
+import { useLanguage } from "@/context/LanguageContext"
+import { t, SupportedLanguage, TranslationDict } from "@/lib/utils"
 
 const experiences: ExperienceType[] = [
   {
     id: "credecoop",
-    title: "Software Developer",
+    title: {
+      en: "Software Developer",
+      es: "Desarrollador de Software"
+    },
     company: "Credecoop R.L.",
     location: "Costa Rica",
     startDate: "2025-01",
     endDate: "2025-05",
     current: false,
-    description: [
-      "Developed and maintained enterprise-level applications using Java and Jakarta EE technologies",
-      "Migrated legacy Oracle Forms applications to modern Java architecture",
-      "Optimized database queries and improved system performance by 40%",
-      "Collaborated with cross-functional teams to deliver high-quality software solutions",
-      "Implemented best practices for code quality and maintainability"
-    ],
+    description: {
+      en: [
+        "Developed and maintained enterprise-level applications using Java and Jakarta EE technologies",
+        "Migrated legacy Oracle Forms applications to modern Java architecture",
+        "Optimized database queries and improved system performance by 40%",
+        "Collaborated with cross-functional teams to deliver high-quality software solutions",
+        "Implemented best practices for code quality and maintainability"
+      ],
+      es: [
+        "Desarrollé y mantuve aplicaciones empresariales usando Java y Jakarta EE",
+        "Migré aplicaciones heredadas de Oracle Forms a arquitectura moderna en Java",
+        "Optimicé consultas a bases de datos y mejoré el rendimiento del sistema en un 40%",
+        "Colaboré con equipos multidisciplinarios para entregar soluciones de software de alta calidad",
+        "Implementé mejores prácticas para la calidad y mantenibilidad del código"
+      ]
+    },
     technologies: ["Java", "Jakarta EE", "JSF", "JPA", "EJB", "CDI", "PL/SQL", "Oracle Database"]
   },
   {
     id: "freelance",
-    title: "Freelance Developer",
+    title: {
+      en: "Freelance Developer",
+      es: "Desarrollador Freelance"
+    },
     company: "Self-Employed",
     location: "Costa Rica",
     startDate: "2024-11",
     endDate: "2025-05",
     current: false,
-    description: [
-      "Developed a comprehensive electronic invoicing API serving 150+ businesses",
-      "Implemented secure P12 certificate system for digital signatures",
-      "Built tax calculation engine with government compliance requirements",
-      "Designed multi-tenant architecture for scalable business operations",
-      "Integrated with government APIs for invoice validation and compliance"
-    ],
+    description: {
+      en: [
+        "Developed a comprehensive electronic invoicing API serving 150+ businesses",
+        "Implemented secure P12 certificate system for digital signatures",
+        "Built tax calculation engine with government compliance requirements",
+        "Designed multi-tenant architecture for scalable business operations",
+        "Integrated with government APIs for invoice validation and compliance"
+      ],
+      es: [
+        "Desarrollé una API integral de facturación electrónica para más de 150 empresas",
+        "Implementé un sistema seguro de certificados P12 para firmas digitales",
+        "Construí un motor de cálculo de impuestos con cumplimiento gubernamental",
+        "Diseñé arquitectura multi-tenant para operaciones empresariales escalables",
+        "Integré con APIs gubernamentales para validación y cumplimiento de facturas"
+      ]
+    },
     technologies: ["Python", "FastAPI", "PostgreSQL", "Redis", "Docker", "JWT", "XML/XSD", "Cryptography"]
   }
 ]
 
+const experienceLabels: Record<SupportedLanguage, TranslationDict> = {
+  en: {
+    workExperience: "Work Experience",
+    journey: "My professional journey in software development and DevOps engineering",
+    current: "Current",
+    keyResponsibilities: "Key Responsibilities & Achievements",
+    technologiesUsed: "Technologies Used",
+  },
+  es: {
+    workExperience: "Experiencia Laboral",
+    journey: "Mi trayectoria profesional en desarrollo de software e ingeniería DevOps",
+    current: "Actual",
+    keyResponsibilities: "Responsabilidades y logros clave",
+    technologiesUsed: "Tecnologías utilizadas",
+  },
+}
+
+// Add education data with translations
+const education = {
+  degree: {
+    en: "Bachelor's in Systems Engineering",
+    es: "Bachillerato en Ingeniería en Sistemas"
+  },
+  university: {
+    en: "Latin University of Costa Rica",
+    es: "Universidad Latina de Costa Rica"
+  },
+  graduation: {
+    en: "Expected Graduation: August 2025",
+    es: "Graduación esperada: Agosto 2025"
+  },
+  description: {
+    en: "Comprehensive education in software engineering, database systems, and software architecture.",
+    es: "Formación integral en ingeniería de software, bases de datos y arquitectura de software."
+  },
+  focus: {
+    en: "Focus areas include backend development, system design, and modern software development practices.",
+    es: "Áreas de enfoque incluyen desarrollo backend, diseño de sistemas y prácticas modernas de desarrollo de software."
+  }
+}
+
 export default function Experience() {
+  const { language } = useLanguage()
   return (
     <section id="experience" className="section-padding bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,10 +122,10 @@ export default function Experience() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-heading mb-4">
-            Work Experience
+            {t(experienceLabels, language, "workExperience")}
           </h2>
           <p className="text-lg text-body max-w-3xl mx-auto">
-            My professional journey in software development and DevOps engineering
+            {t(experienceLabels, language, "journey")}
           </p>
         </motion.div>
 
@@ -89,7 +157,7 @@ export default function Experience() {
                     <div className="flex items-start justify-between mb-4">
                       <div>
                         <h3 className="text-xl font-semibold text-heading mb-1">
-                          {experience.title}
+                          {experience.title[language]}
                         </h3>
                         <div className="flex items-center gap-2 text-body mb-2">
                           <Building className="h-4 w-4" />
@@ -111,7 +179,7 @@ export default function Experience() {
                       
                       {experience.current && (
                         <span className="px-2 py-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 text-xs rounded-full font-medium">
-                          Current
+                          {t(experienceLabels, language, "current")}
                         </span>
                       )}
                     </div>
@@ -119,16 +187,12 @@ export default function Experience() {
                     {/* Job Description */}
                     <div className="mb-6">
                       <h4 className="text-sm font-semibold text-heading mb-3">
-                        Key Responsibilities & Achievements
+                        {t(experienceLabels, language, "keyResponsibilities")}
                       </h4>
-                      <ul className="space-y-2">
-                        {experience.description.map((item, itemIndex) => (
-                          <li
-                            key={itemIndex}
-                            className="text-sm text-body flex items-start gap-2"
-                          >
-                            <span className="text-primary-600 dark:text-primary-400 mt-1">•</span>
-                            {item}
+                      <ul className="list-disc pl-5 space-y-2">
+                        {experience.description[language].map((desc: string, i: number) => (
+                          <li key={i} className="text-body text-sm">
+                            {desc}
                           </li>
                         ))}
                       </ul>
@@ -138,7 +202,7 @@ export default function Experience() {
                     <div>
                       <h4 className="text-sm font-semibold text-heading mb-3 flex items-center gap-2">
                         <Code className="h-4 w-4" />
-                        Technologies Used
+                        {t(experienceLabels, language, "technologiesUsed")}
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {experience.technologies.map((tech) => (
@@ -168,7 +232,7 @@ export default function Experience() {
         >
           <div className="text-center mb-8">
             <h3 className="text-2xl font-semibold text-heading mb-4">
-              Education
+              {language === "es" ? "Educación" : "Education"}
             </h3>
           </div>
           
@@ -177,25 +241,25 @@ export default function Experience() {
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <h4 className="text-xl font-semibold text-heading mb-1">
-                    Bachelor&apos;s in Systems Engineering
+                    {education.degree[language]}
                   </h4>
                   <div className="flex items-center gap-2 text-body mb-2">
                     <Building className="h-4 w-4" />
-                    <span className="font-medium">Latin University of Costa Rica</span>
+                    <span className="font-medium">{education.university[language]}</span>
                   </div>
                   <div className="flex items-center gap-1 text-sm text-muted">
                     <Calendar className="h-4 w-4" />
-                    <span>Expected Graduation: August 2025</span>
+                    <span>{education.graduation[language]}</span>
                   </div>
                 </div>
               </div>
               
               <div className="space-y-2">
                 <p className="text-sm text-body">
-                  Comprehensive education in software engineering, database systems, and software architecture.
+                  {education.description[language]}
                 </p>
                 <p className="text-sm text-body">
-                  Focus areas include backend development, system design, and modern software development practices.
+                  {education.focus[language]}
                 </p>
               </div>
             </div>

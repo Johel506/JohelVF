@@ -1,9 +1,9 @@
 export interface Project {
   id: string
-  title: string
-  description: string
+  title: { en: string; es: string }
+  description: { en: string; es: string }
   techStack: string[]
-  features: string[]
+  features: { en: string[]; es: string[] }
   githubUrl?: string
   liveUrl?: string
   status?: "completed" | "in-progress" | "planned"
@@ -13,20 +13,20 @@ export interface Project {
 export interface Skill {
   id: string
   name: string
-  category: "backend" | "devops" | "frontend" | "database" | "other"
-  level: "beginner" | "intermediate" | "advanced" | "expert"
+  category: "backend" | "devops" | "frontend" | "database" | "other" | "frameworks" | "libraries"
+  level?: "beginner" | "intermediate" | "advanced" | "expert"
   icon?: string
 }
 
 export interface Experience {
   id: string
-  title: string
+  title: { en: string; es: string }
   company: string
   location: string
   startDate: string
   endDate?: string
   current?: boolean
-  description: string[]
+  description: { en: string[]; es: string[] }
   technologies: string[]
 }
 

@@ -3,6 +3,8 @@
 import { motion } from "framer-motion"
 import { Github, Linkedin, Mail, Calendar, ArrowRight } from "lucide-react"
 import { SocialLink } from "@/types"
+import { useLanguage } from "@/context/LanguageContext"
+import { t, SupportedLanguage, TranslationDict } from "@/lib/utils"
 
 const socialLinks: SocialLink[] = [
   {
@@ -35,7 +37,32 @@ const getIcon = (iconName: string) => {
   }
 }
 
+const heroLabels: Record<SupportedLanguage, TranslationDict> = {
+  en: {
+    name: "Johel Venegas",
+    title: "Backend Developer & DevOps Engineer",
+    description: "Specializing in system modernization and cloud-native architectures",
+    downloadCVSpanish: "Download CV (Spanish)",
+    downloadCVEnglish: "Download CV (English)",
+    scheduleCall: "Schedule a Call",
+    viewWork: "View My Work",
+    basedIn: "Based in Costa Rica • UTC-6",
+  },
+  es: {
+    name: "Johel Venegas",
+    title: "Desarrollador Backend & Ingeniero DevOps",
+    description: "Especializado en modernización de sistemas y arquitecturas cloud-native",
+    downloadCVSpanish: "Descargar CV (Español)",
+    downloadCVEnglish: "Descargar CV (Inglés)",
+    scheduleCall: "Agendar una llamada",
+    viewWork: "Ver mi trabajo",
+    basedIn: "Con base en Costa Rica • UTC-6",
+  },
+}
+
 export default function Hero() {
+  const { language } = useLanguage()
+
   const handleScheduleCall = () => {
     window.open("https://calendly.com/johelvf506/software-developer-career-conversation", "_blank")
   }
@@ -82,14 +109,19 @@ export default function Hero() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center">
-          {/* Profile Image Placeholder */}
+          {/* Profile Image */}
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="mx-auto mb-8 w-32 h-32 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white text-4xl font-bold shadow-lg"
+            className="mx-auto mb-8 w-32 h-32 rounded-full overflow-hidden shadow-lg border-4 border-primary-400"
           >
-            JV
+            <img
+              src="/profile.png"
+              alt="Profile picture of Johel Venegas"
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
           </motion.div>
 
           {/* Name and Title */}
@@ -99,7 +131,7 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-heading mb-4"
           >
-            Johel Venegas
+            {t(heroLabels, language, "name")}
           </motion.h1>
 
           <motion.h2
@@ -108,7 +140,7 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl sm:text-2xl lg:text-3xl font-semibold text-primary-600 dark:text-primary-400 mb-4"
           >
-            Backend Developer & DevOps Engineer
+            {t(heroLabels, language, "title")}
           </motion.h2>
 
           <motion.p
@@ -117,8 +149,31 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="text-lg sm:text-xl text-body mb-8 max-w-3xl mx-auto"
           >
-            Specializing in system modernization and cloud-native architectures
+            {t(heroLabels, language, "description")}
           </motion.p>
+
+          {/* CV Download Buttons */}
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6"
+          >
+            <a
+              href="/CV_JohelVenegas_ES.pdf"
+              download
+              className="btn-secondary flex items-center gap-2 group"
+            >
+              {t(heroLabels, language, "downloadCVSpanish")}
+            </a>
+            <a
+              href="/ResumeATS_JohelVenegas.pdf"
+              download
+              className="btn-secondary flex items-center gap-2 group"
+            >
+              {t(heroLabels, language, "downloadCVEnglish")}
+            </a>
+          </motion.div>
 
           {/* CTA Buttons */}
           <motion.div
@@ -132,7 +187,7 @@ export default function Hero() {
               className="btn-primary flex items-center gap-2 group"
             >
               <Calendar className="h-5 w-5" />
-              Schedule a Call
+              {t(heroLabels, language, "scheduleCall")}
               <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </button>
             
@@ -140,7 +195,7 @@ export default function Hero() {
               onClick={handleViewWork}
               className="btn-secondary flex items-center gap-2 group"
             >
-              View My Work
+              {t(heroLabels, language, "viewWork")}
               <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </motion.div>
@@ -178,7 +233,7 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.8 }}
             className="text-sm text-muted mt-8"
           >
-            Based in Costa Rica • UTC-6
+            {t(heroLabels, language, "basedIn")}
           </motion.p>
         </div>
       </div>

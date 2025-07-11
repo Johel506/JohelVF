@@ -1,9 +1,11 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useLanguage } from "@/context/LanguageContext"
 import { Menu, X, Moon, Sun } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { NavigationItem } from "@/types"
+import { t, SupportedLanguage, TranslationDict } from "@/lib/utils"
 
 const navigation: NavigationItem[] = [
   { name: "Home", href: "#home" },
@@ -14,10 +16,30 @@ const navigation: NavigationItem[] = [
   { name: "Contact", href: "#contact" },
 ]
 
+const navLabels: Record<SupportedLanguage, TranslationDict> = {
+  en: {
+    Home: "Home",
+    About: "About",
+    Skills: "Skills",
+    Projects: "Projects",
+    Experience: "Experience",
+    Contact: "Contact",
+  },
+  es: {
+    Home: "Inicio",
+    About: "Sobre mí",
+    Skills: "Habilidades",
+    Projects: "Proyectos",
+    Experience: "Experiencia",
+    Contact: "Contacto",
+  },
+}
+
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [isDark, setIsDark] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { language, setLanguage } = useLanguage()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,6 +69,10 @@ export default function Navigation() {
     }
   }
 
+  const toggleLanguage = () => {
+    setLanguage(language === "en" ? "es" : "en")
+  }
+
   const handleNavClick = (href: string) => {
     setIsOpen(false)
     const element = document.querySelector(href)
@@ -64,82 +90,90 @@ export default function Navigation() {
           : "bg-transparent"
       )}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <a
-              href="#home"
-              className="text-2xl font-bold gradient-text"
-              onClick={() => handleNavClick("#home")}
-            >
-              JV
-            </a>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    handleNavClick(item.href)
-                  }}
-                  className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
-                >
-                  {item.name}
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Dark Mode Toggle & Mobile Menu Button */}
-          <div className="flex items-center space-x-4">
-            <button
-              onClick={toggleDarkMode}
-              className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
-              aria-label="Toggle dark mode"
-            >
-              {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </button>
-
-            {/* Mobile menu button */}
-            <div className="md:hidden">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
-                aria-label="Toggle mobile menu"
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo */}
+            <div className="flex-shrink-0">
+              <a
+                href="#home"
+                className="text-2xl font-bold gradient-text"
+                onClick={() => handleNavClick("#home")}
               >
-                {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </button>
+                JV
+              </a>
             </div>
-          </div>
-        </div>
 
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    handleNavClick(item.href)
-                  }}
-                  className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
+            {/* Desktop Navigation */}
+            <div className="hidden md:block">
+              <div className="ml-10 flex items-baseline space-x-4">
+                {navigation.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleNavClick(item.href)
+                    }}
+                    className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                  >
+                    {t(navLabels, language, item.name)}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Dark Mode Toggle & Mobile Menu Button */}
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={toggleDarkMode}
+                className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+                aria-label="Toggle dark mode"
+              >
+                {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              </button>
+              {/* Language Switcher */}
+              <button
+                onClick={toggleLanguage}
+                className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+                aria-label="Toggle language"
+              >
+                {language === "en" ? <span role="img" aria-label="English">🇺🇸</span> : <span role="img" aria-label="Spanish">🇪🇸</span>}
+              </button>
+
+              {/* Mobile menu button */}
+              <div className="md:hidden">
+                <button
+                  onClick={() => setIsOpen(!isOpen)}
+                  className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+                  aria-label="Toggle mobile menu"
                 >
-                  {item.name}
-                </a>
-              ))}
+                  {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                </button>
+              </div>
             </div>
           </div>
-        )}
-      </div>
-    </nav>
+
+          {/* Mobile Navigation */}
+          {isOpen && (
+            <div className="md:hidden">
+              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+                {navigation.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleNavClick(item.href)
+                    }}
+                    className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
+                  >
+                    {t(navLabels, language, item.name)}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </nav>
   )
 } 

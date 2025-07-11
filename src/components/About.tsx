@@ -2,31 +2,107 @@
 
 import { motion } from "framer-motion"
 import { Code, Database, Cloud, Zap } from "lucide-react"
+import { useLanguage } from "@/context/LanguageContext"
+import { t, SupportedLanguage, TranslationDict } from "@/lib/utils"
 
 const strengths = [
   {
     icon: <Code className="h-6 w-6" />,
-    title: "Legacy System Modernization",
-    description: "Expert in migrating and modernizing legacy applications to modern architectures",
+    key: "legacyModernization"
   },
   {
     icon: <Database className="h-6 w-6" />,
-    title: "RESTful APIs & Microservices",
-    description: "Designing and implementing scalable API solutions with microservices architecture",
+    key: "restMicroservices"
   },
   {
     icon: <Cloud className="h-6 w-6" />,
-    title: "CI/CD Pipelines",
-    description: "Building robust deployment pipelines for automated testing and deployment",
+    key: "cicdPipelines"
   },
   {
     icon: <Zap className="h-6 w-6" />,
-    title: "Performance Optimization",
-    description: "Optimizing database queries and application performance for better user experience",
+    key: "performanceOpt"
   },
 ]
 
+const aboutLabels: Record<SupportedLanguage, TranslationDict> = {
+  en: {
+    aboutMe: "About Me",
+    background: "Professional Background",
+    desc1: "I'm a Backend Developer and DevOps Engineer from Costa Rica, currently focused on system modernization and cloud-native architectures. With experience in both Python and Java ecosystems, I specialize in building robust APIs, optimizing database performance, and implementing CI/CD pipelines.",
+    desc2: "My current work involves developing RESTful APIs for electronic invoicing systems serving 150+ businesses, ensuring compliance with government regulations while maintaining high performance and reliability standards.",
+    desc3: "I'm passionate about DevOps practices and currently building a production-ready CI/CD pipeline for Python microservices, incorporating monitoring, logging, and infrastructure as code principles.",
+    location: "Location",
+    experience: "Experience",
+    education: "Education",
+    languages: "Languages",
+    costaRica: "Costa Rica",
+    utc: "UTC-6",
+    years: "2+ Years",
+    backendDevOps: "Backend & DevOps",
+    systemsEng: "Systems Engineering",
+    latinUniv: "Latin University",
+    spanishEnglish: "Spanish, English",
+    fluent: "Fluent",
+    strengths: "Key Strengths",
+    collabNote: "Available for international collaboration",
+    legacyModernization: "Legacy System Modernization",
+    legacyModernizationDesc: "Expert in migrating and modernizing legacy applications to modern architectures",
+    restMicroservices: "RESTful APIs & Microservices",
+    restMicroservicesDesc: "Designing and implementing scalable API solutions with microservices architecture",
+    cicdPipelines: "CI/CD Pipelines",
+    cicdPipelinesDesc: "Building robust deployment pipelines for automated testing and deployment",
+    performanceOpt: "Performance Optimization",
+    performanceOptDesc: "Optimizing database queries and application performance for better user experience",
+    availability: "Availability",
+    availableFor: "Available for",
+    fullTimePositions: "Full-time positions",
+    contractWork: "Contract work",
+    contractYes: "Yes",
+    remoteWork: "Remote work",
+    remotePreferred: "Preferred",
+    timeZone: "Time zone",
+  },
+  es: {
+    aboutMe: "Sobre mí",
+    background: "Trayectoria profesional",
+    desc1: "Soy Backend Developer e Ingeniero DevOps de Costa Rica, enfocado en la modernización de sistemas y arquitecturas cloud-native. Con experiencia en los ecosistemas de Python y Java, me especializo en construir APIs robustas, optimizar bases de datos e implementar pipelines de CI/CD.",
+    desc2: "Actualmente desarrollo APIs RESTful para sistemas de facturación electrónica que sirven a más de 150 empresas, asegurando el cumplimiento con regulaciones gubernamentales y altos estándares de rendimiento y confiabilidad.",
+    desc3: "Me apasionan las prácticas DevOps y actualmente construyo un pipeline CI/CD para microservicios Python, incorporando monitoreo, logging e infraestructura como código.",
+    location: "Ubicación",
+    experience: "Experiencia",
+    education: "Educación",
+    languages: "Idiomas",
+    costaRica: "Costa Rica",
+    utc: "UTC-6",
+    years: "2+ años",
+    backendDevOps: "Backend & DevOps",
+    systemsEng: "Ingeniería en Sistemas",
+    latinUniv: "Universidad Latina",
+    spanishEnglish: "Español, Inglés",
+    fluent: "Fluido",
+    strengths: "Puntos fuertes",
+    collabNote: "Disponible para colaboración internacional",
+    legacyModernization: "Modernización de sistemas heredados",
+    legacyModernizationDesc: "Experto en migrar y modernizar aplicaciones heredadas a arquitecturas modernas",
+    restMicroservices: "APIs RESTful y Microservicios",
+    restMicroservicesDesc: "Diseño e implementación de soluciones API escalables con arquitectura de microservicios",
+    cicdPipelines: "Pipelines CI/CD",
+    cicdPipelinesDesc: "Construcción de pipelines robustos para pruebas y despliegue automatizado",
+    performanceOpt: "Optimización de rendimiento",
+    performanceOptDesc: "Optimización de consultas a bases de datos y rendimiento de aplicaciones para mejor experiencia de usuario",
+    availability: "Disponibilidad",
+    availableFor: "Disponible para",
+    fullTimePositions: "Puestos de tiempo completo",
+    contractWork: "Trabajo por contrato",
+    contractYes: "Sí",
+    remoteWork: "Trabajo remoto",
+    remotePreferred: "Preferido",
+    timeZone: "Zona horaria",
+  },
+}
+
 export default function About() {
+  const { language } = useLanguage()
   return (
     <section id="about" className="section-padding bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,10 +114,10 @@ export default function About() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-heading mb-4">
-            About Me
+            {t(aboutLabels, language, "aboutMe")}
           </h2>
           <p className="text-lg text-body max-w-3xl mx-auto">
-            Backend developer and DevOps engineer passionate about creating robust, scalable solutions
+            {t(aboutLabels, language, "background")}
           </p>
         </motion.div>
 
@@ -56,47 +132,54 @@ export default function About() {
           >
             <div className="space-y-4">
               <h3 className="text-2xl font-semibold text-heading">
-                Professional Background
+                {t(aboutLabels, language, "background")}
               </h3>
               <p className="text-body">
-                I&apos;m a Backend Developer and DevOps Engineer from Costa Rica, currently focused on 
-                system modernization and cloud-native architectures. With experience in both Python 
-                and Java ecosystems, I specialize in building robust APIs, optimizing database 
-                performance, and implementing CI/CD pipelines.
+                {t(aboutLabels, language, "desc1")}
               </p>
               <p className="text-body">
-                My current work involves developing RESTful APIs for electronic invoicing systems 
-                serving 150+ businesses, ensuring compliance with government regulations while 
-                maintaining high performance and reliability standards.
+                {t(aboutLabels, language, "desc2")}
               </p>
               <p className="text-body">
-                I&apos;m passionate about DevOps practices and currently building a production-ready 
-                CI/CD pipeline for Python microservices, incorporating monitoring, logging, and 
-                infrastructure as code principles.
+                {t(aboutLabels, language, "desc3")}
               </p>
             </div>
 
             {/* Key Information */}
             <div className="grid sm:grid-cols-2 gap-4 pt-6">
+              {/* Location */}
               <div className="p-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
-                <h4 className="font-semibold text-heading mb-1">Location</h4>
-                <p className="text-body">Costa Rica</p>
-                <p className="text-sm text-muted">UTC-6</p>
+                <h4 className="font-semibold text-heading mb-1">{t(aboutLabels, language, "location")}</h4>
+                <p className="text-body">{t(aboutLabels, language, "costaRica")}</p>
+                <p className="text-sm text-muted">{t(aboutLabels, language, "utc")}</p>
               </div>
+              {/* Experience */}
               <div className="p-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
-                <h4 className="font-semibold text-heading mb-1">Experience</h4>
-                <p className="text-body">2+ Years</p>
-                <p className="text-sm text-muted">Backend & DevOps</p>
+                <h4 className="font-semibold text-heading mb-1">{t(aboutLabels, language, "experience")}</h4>
+                <p className="text-body">{t(aboutLabels, language, "years")}</p>
+                <p className="text-sm text-muted">{t(aboutLabels, language, "backendDevOps")}</p>
               </div>
+              {/* Education */}
               <div className="p-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
-                <h4 className="font-semibold text-heading mb-1">Education</h4>
-                <p className="text-body">Systems Engineering</p>
-                <p className="text-sm text-muted">Latin University</p>
+                <h4 className="font-semibold text-heading mb-1">{t(aboutLabels, language, "education")}</h4>
+                <p className="text-body">{t(aboutLabels, language, "systemsEng")}</p>
+                <p className="text-sm text-muted">{t(aboutLabels, language, "latinUniv")}</p>
               </div>
+              {/* Languages */}
               <div className="p-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
-                <h4 className="font-semibold text-heading mb-1">Languages</h4>
-                <p className="text-body">Spanish, English</p>
-                <p className="text-sm text-muted">Fluent</p>
+                <h4 className="font-semibold text-heading mb-1">{t(aboutLabels, language, "languages")}</h4>
+                <p className="text-body">{t(aboutLabels, language, "spanishEnglish")}</p>
+                <p className="text-sm text-muted">{t(aboutLabels, language, "fluent")}</p>
+              </div>
+              {/* Availability */}
+              <div className="p-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm col-span-2">
+                <h4 className="font-semibold text-heading mb-1">{t(aboutLabels, language, "availability")}</h4>
+                <ul className="text-body text-sm space-y-1">
+                  <li><span className="font-medium">{t(aboutLabels, language, "availableFor")}:</span> {t(aboutLabels, language, "fullTimePositions")}</li>
+                  <li><span className="font-medium">{t(aboutLabels, language, "contractWork")}:</span> {t(aboutLabels, language, "contractYes")}</li>
+                  <li><span className="font-medium">{t(aboutLabels, language, "remoteWork")}:</span> {t(aboutLabels, language, "remotePreferred")}</li>
+                  <li><span className="font-medium">{t(aboutLabels, language, "timeZone")}:</span> UTC-6 ({t(aboutLabels, language, "costaRica")})</li>
+                </ul>
               </div>
             </div>
           </motion.div>
@@ -111,7 +194,7 @@ export default function About() {
           >
             {strengths.map((strength, index) => (
               <motion.div
-                key={strength.title}
+                key={strength.key}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
@@ -122,10 +205,10 @@ export default function About() {
                   {strength.icon}
                 </div>
                 <h4 className="text-lg font-semibold text-heading mb-2">
-                  {strength.title}
+                  {t(aboutLabels, language, strength.key)}
                 </h4>
                 <p className="text-body text-sm leading-relaxed">
-                  {strength.description}
+                  {t(aboutLabels, language, strength.key + "Desc")}
                 </p>
               </motion.div>
             ))}
@@ -142,7 +225,7 @@ export default function About() {
         >
           <div className="bg-primary-50 dark:bg-primary-900/20 p-6 rounded-lg border border-primary-200 dark:border-primary-800">
             <h4 className="text-lg font-semibold text-primary-900 dark:text-primary-100 mb-2">
-              International Collaboration Ready
+              {t(aboutLabels, language, "collabNote")}
             </h4>
             <p className="text-primary-700 dark:text-primary-300">
               My timezone (UTC-6) is ideal for collaboration with teams across the Americas and Europe. 
