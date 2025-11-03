@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Mail, Phone, MapPin, Calendar, Send, MessageSquare } from "lucide-react"
+import { useForm, ValidationError } from "@formspree/react"
 import { ContactForm } from "@/types"
 import { t, SupportedLanguage, TranslationDict } from "@/lib/utils"
 import { useLanguage } from "@/context/LanguageContext"
@@ -74,40 +75,58 @@ const contactLabels: Record<SupportedLanguage, TranslationDict> = {
 
 export default function Contact() {
   const { language } = useLanguage()
+  const [state, handleSubmit] = useForm("xyzbayeq")
   const [formData, setFormData] = useState<ContactForm>({
     name: "",
     email: "",
     company: "",
     message: "",
   })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    // Here you would typically send the form data to your backend
-    console.log("Form submitted:", formData)
-    
-    setSubmitStatus("success")
-    setIsSubmitting(false)
-    setFormData({ name: "", email: "", company: "", message: "" })
-    
-    // Reset status after 3 seconds
-    setTimeout(() => setSubmitStatus("idle"), 3000)
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    handleSubmit(e)
   }
 
   const handleScheduleCall = () => {
     window.open("https://calendly.com/johelvf506/software-developer-career-conversation", "_blank")
+  }
+
+  if (state.succeeded) {
+    return (
+      <section id="contact" className="section-padding bg-gray-50 dark:bg-gray-900">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center"
+          >
+            <div className="max-w-md mx-auto p-8 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
+              <div className="text-4xl mb-4">✓</div>
+              <h2 className="text-2xl font-bold text-green-600 dark:text-green-400 mb-4">
+                {language === "es" ? "¡Mensaje enviado!" : "Message sent!"}
+              </h2>
+              <p className="text-green-600 dark:text-green-400 mb-6">
+                {language === "es" 
+                  ? "Gracias por contactarme. Te responderé dentro de 24 horas."
+                  : "Thanks for reaching out. I'll get back to you within 24 hours."}
+              </p>
+              <button
+                onClick={() => window.location.reload()}
+                className="btn-primary"
+              >
+                {language === "es" ? "Enviar otro mensaje" : "Send another message"}
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    )
   }
 
   return (
@@ -144,7 +163,7 @@ export default function Contact() {
               </h3>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleFormSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-heading mb-2">
@@ -175,6 +194,7 @@ export default function Contact() {
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                     placeholder={t(contactLabels, language, "emailField")}
                   />
+                  <ValidationError prefix="Email" field="email" errors={state.errors} />
                 </div>
               </div>
 
@@ -207,17 +227,18 @@ export default function Contact() {
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none"
                   placeholder={t(contactLabels, language, "messagePlaceholder")}
                 />
+                <ValidationError prefix="Message" field="message" errors={state.errors} />
               </div>
 
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={state.submitting}
                 className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? (
+                {state.submitting ? (
                   <>
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                    {t(contactLabels, language, "sending")}
+                    {language === "es" ? "Enviando..." : "Sending..."}
                   </>
                 ) : (
                   <>
@@ -226,26 +247,6 @@ export default function Contact() {
                   </>
                 )}
               </button>
-
-              {submitStatus === "success" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-lg text-sm"
-                >
-                  {t(contactLabels, language, "successMessage")}
-                </motion.div>
-              )}
-
-              {submitStatus === "error" && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded-lg text-sm"
-                >
-                  {t(contactLabels, language, "errorMessage")}
-                </motion.div>
-              )}
             </form>
           </motion.div>
 
