@@ -163,14 +163,14 @@ export default function Hero() {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6"
           >
             <a
-              href="/CV_JohelVenegas_ES.pdf"
+              href="/Johel-Venegas-ATS-G.pdf"
               download
               className="btn-secondary flex items-center gap-2 group"
             >
               {t(heroLabels, language, "downloadCVSpanish")}
             </a>
             <a
-              href="/ResumeATS_JohelVenegas.pdf"
+              href="/Johel-Venegas-ATS-EN.pdf"
               download
               className="btn-secondary flex items-center gap-2 group"
             >
