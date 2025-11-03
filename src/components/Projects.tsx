@@ -68,7 +68,7 @@ const projects: Project[] = [
         "Estrategia de despliegue multi-entorno"
       ]
     },
-    status: "in-progress",
+    status: "completed",
     githubUrl: "https://github.com/Johel506/devops-playground",
   },
   {
@@ -189,15 +189,12 @@ export default function Projects() {
                 {/* Project Links */}
                 <div className="flex gap-2">
                   {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                      aria-label="View GitHub repository"
+                    <div
+                      className="p-2 text-gray-400 dark:text-gray-600 cursor-not-allowed"
+                      aria-label="GitHub repository (private)"
                     >
                       <Github className="h-5 w-5" />
-                    </a>
+                    </div>
                   )}
                   {project.liveUrl && (
                     <a

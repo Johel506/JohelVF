@@ -88,16 +88,16 @@ const experienceLabels: Record<SupportedLanguage, TranslationDict> = {
 // Add education data with translations
 const education = {
   degree: {
-    en: "Bachelor's in Systems Engineering",
-    es: "Bachillerato en Ingeniería en Sistemas"
+    en: "Computer Systems Engineer",
+    es: "Ingeniero en Sistemas Computacionales"
   },
   university: {
     en: "Latin University of Costa Rica",
     es: "Universidad Latina de Costa Rica"
   },
   graduation: {
-    en: "Expected Graduation: August 2025",
-    es: "Graduación esperada: Agosto 2025"
+    en: "Graduated: August 2025",
+    es: "Graduado: Agosto 2025"
   },
   description: {
     en: "Comprehensive education in software engineering, database systems, and software architecture.",
