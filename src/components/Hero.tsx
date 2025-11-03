@@ -41,8 +41,8 @@ const getIcon = (iconName: string) => {
 const heroLabels: Record<SupportedLanguage, TranslationDict> = {
   en: {
     name: "Johel Venegas",
-    title: "Backend Developer & DevOps Engineer",
-    description: "Specializing in system modernization and cloud-native architectures",
+    title: "Computer Systems Engineer",
+    description: "Specializing in backend development, DevOps, and cloud-native architectures",
     downloadCVSpanish: "Download CV (Spanish)",
     downloadCVEnglish: "Download CV (English)",
     scheduleCall: "Schedule a Call",
@@ -51,8 +51,8 @@ const heroLabels: Record<SupportedLanguage, TranslationDict> = {
   },
   es: {
     name: "Johel Venegas",
-    title: "Desarrollador Backend & Ingeniero DevOps",
-    description: "Especializado en modernización de sistemas y arquitecturas cloud-native",
+    title: "Ingeniero en Sistemas Computacionales",
+    description: "Especializado en desarrollo backend, DevOps y arquitecturas cloud-native",
     downloadCVSpanish: "Descargar CV (Español)",
     downloadCVEnglish: "Descargar CV (Inglés)",
     scheduleCall: "Agendar una llamada",
