@@ -1,17 +1,17 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Code, Database, Cloud, Zap } from "lucide-react"
+import { RefreshCw, Boxes, Cloud, Landmark } from "lucide-react"
 import { useLanguage } from "@/context/LanguageContext"
 import { t, SupportedLanguage, TranslationDict } from "@/lib/utils"
 
 const strengths = [
   {
-    icon: <Code className="h-6 w-6" />,
+    icon: <RefreshCw className="h-6 w-6" />,
     key: "legacyModernization"
   },
   {
-    icon: <Database className="h-6 w-6" />,
+    icon: <Boxes className="h-6 w-6" />,
     key: "restMicroservices"
   },
   {
@@ -19,7 +19,7 @@ const strengths = [
     key: "cicdPipelines"
   },
   {
-    icon: <Zap className="h-6 w-6" />,
+    icon: <Landmark className="h-6 w-6" />,
     key: "performanceOpt"
   },
 ]
@@ -28,31 +28,32 @@ const aboutLabels: Record<SupportedLanguage, TranslationDict> = {
   en: {
     aboutMe: "About Me",
     background: "Professional Background",
-    desc1: "I'm a Computer Systems Engineer from Costa Rica, specializing in backend development and DevOps practices. With experience in both Python and Java ecosystems, I focus on building robust APIs, optimizing database performance, and implementing modern cloud-native architectures.",
-    desc2: "My recent work includes developing RESTful APIs for electronic invoicing systems serving 150+ businesses, ensuring compliance with government regulations while maintaining high performance and reliability standards.",
-    desc3: "I'm passionate about system modernization, CI/CD automation, and Linux administration. I combine my systems engineering background with hands-on development experience to deliver scalable and maintainable solutions.",
+    desc1: "I'm a Backend Developer at S-COM, an IT consultancy serving major banks in Costa Rica. I work with C# .NET 8/10 building cloud-native microservices on Azure and modernizing legacy banking systems.",
+    desc2: "I build REST APIs and microservices with Dapr, containerize them with Docker and deploy them to Azure Kubernetes Service through GitHub Actions pipelines. Right now I'm working on the incremental migration of a legacy ASP.NET banking application to .NET 10 using the Strangler Fig pattern, while supporting production incidents and business-critical logic.",
+    desc3: "I'm a Microsoft Certified Azure Solutions Architect Expert and Azure Administrator Associate, currently preparing for the DevOps Engineer Expert certification (AZ-400). I communicate comfortably in English and enjoy collaborative engineering teams.",
     location: "Location",
     experience: "Experience",
     education: "Education",
     languages: "Languages",
     costaRica: "Costa Rica",
     utc: "UTC-6",
-    years: "1+ Year",
-    backendDevOps: "Backend & DevOps",
+    years: "2+ Years",
+    backendDevOps: "Backend · .NET · Azure",
     systemsEng: "Systems Engineering",
     latinUniv: "Latin University",
     spanishEnglish: "Spanish, English",
-    fluent: "Fluent",
+    fluent: "Native · Professional working",
     strengths: "Key Strengths",
     collabNote: "Available for international collaboration",
+    collabDesc: "My timezone (UTC-6) works well with teams across the Americas and overlaps with Europe. I'm experienced in remote work and adapt to different time zones for meetings and coordination.",
     legacyModernization: "Legacy System Modernization",
-    legacyModernizationDesc: "Expert in migrating and modernizing legacy applications to modern architectures",
-    restMicroservices: "RESTful APIs & Microservices",
-    restMicroservicesDesc: "Designing and implementing scalable API solutions with microservices architecture",
-    cicdPipelines: "CI/CD Pipelines",
-    cicdPipelinesDesc: "Building robust deployment pipelines for automated testing and deployment",
-    performanceOpt: "Performance Optimization",
-    performanceOptDesc: "Optimizing database queries and application performance for better user experience",
+    legacyModernizationDesc: "Incremental migration of legacy ASP.NET and Oracle Forms systems with the Strangler Fig pattern and YARP, without service interruption",
+    restMicroservices: "Cloud-native Microservices",
+    restMicroservicesDesc: "Atomic and orchestrator services in .NET with Dapr, EF Core, Dapper and Polly resilience patterns",
+    cicdPipelines: "Azure & DevOps",
+    cicdPipelinesDesc: "Docker, AKS, APIM, Key Vault and Application Insights, shipped through GitHub Actions CI/CD",
+    performanceOpt: "Banking Domain & Data",
+    performanceOptDesc: "Loan collections, payroll deductions and core-banking integrations on SQL Server and Oracle PL/SQL",
     availability: "Availability",
     availableFor: "Available for",
     fullTimePositions: "Full-time positions",
@@ -65,31 +66,32 @@ const aboutLabels: Record<SupportedLanguage, TranslationDict> = {
   es: {
     aboutMe: "Sobre mí",
     background: "Trayectoria profesional",
-    desc1: "Soy Ingeniero en Sistemas Computacionales de Costa Rica, especializado en desarrollo backend y prácticas DevOps. Con experiencia en los ecosistemas de Python y Java, me enfoco en construir APIs robustas, optimizar bases de datos e implementar arquitecturas modernas cloud-native.",
-    desc2: "Mi trabajo reciente incluye el desarrollo de APIs RESTful para sistemas de facturación electrónica que sirven a más de 150 empresas, asegurando el cumplimiento con regulaciones gubernamentales y altos estándares de rendimiento y confiabilidad.",
-    desc3: "Me apasiona la modernización de sistemas, la automatización CI/CD y la administración Linux. Combino mi formación en ingeniería de sistemas con experiencia práctica en desarrollo para entregar soluciones escalables y mantenibles.",
+    desc1: "Soy Desarrollador Backend en S-COM, una consultora de TI que atiende a los principales bancos de Costa Rica. Trabajo con C# .NET 8/10 construyendo microservicios cloud-native en Azure y modernizando sistemas bancarios heredados.",
+    desc2: "Construyo APIs REST y microservicios con Dapr, los conteinerizo con Docker y los despliego en Azure Kubernetes Service mediante pipelines de GitHub Actions. Actualmente trabajo en la migración incremental de una aplicación bancaria ASP.NET heredada a .NET 10 con el patrón Strangler Fig, mientras atiendo incidentes de producción y lógica crítica de negocio.",
+    desc3: "Soy Microsoft Certified Azure Solutions Architect Expert y Azure Administrator Associate, y me preparo para la certificación DevOps Engineer Expert (AZ-400). Me comunico con fluidez en inglés y disfruto trabajar en equipos de ingeniería colaborativos.",
     location: "Ubicación",
     experience: "Experiencia",
     education: "Educación",
     languages: "Idiomas",
     costaRica: "Costa Rica",
     utc: "UTC-6",
-    years: "1+ año",
-    backendDevOps: "Backend & DevOps",
+    years: "2+ años",
+    backendDevOps: "Backend · .NET · Azure",
     systemsEng: "Ingeniería en Sistemas",
     latinUniv: "Universidad Latina",
     spanishEnglish: "Español, Inglés",
-    fluent: "Fluido",
+    fluent: "Nativo · Profesional",
     strengths: "Puntos fuertes",
     collabNote: "Disponible para colaboración internacional",
+    collabDesc: "Mi zona horaria (UTC-6) funciona muy bien con equipos de toda América y tiene traslape con Europa. Tengo experiencia en trabajo remoto y me adapto a distintas zonas horarias para reuniones y coordinación.",
     legacyModernization: "Modernización de sistemas heredados",
-    legacyModernizationDesc: "Experto en migrar y modernizar aplicaciones heredadas a arquitecturas modernas",
-    restMicroservices: "APIs RESTful y Microservicios",
-    restMicroservicesDesc: "Diseño e implementación de soluciones API escalables con arquitectura de microservicios",
-    cicdPipelines: "Pipelines CI/CD",
-    cicdPipelinesDesc: "Construcción de pipelines robustos para pruebas y despliegue automatizado",
-    performanceOpt: "Optimización de rendimiento",
-    performanceOptDesc: "Optimización de consultas a bases de datos y rendimiento de aplicaciones para mejor experiencia de usuario",
+    legacyModernizationDesc: "Migración incremental de sistemas ASP.NET y Oracle Forms heredados con el patrón Strangler Fig y YARP, sin interrupción del servicio",
+    restMicroservices: "Microservicios cloud-native",
+    restMicroservicesDesc: "Servicios atómicos y orquestadores en .NET con Dapr, EF Core, Dapper y patrones de resiliencia con Polly",
+    cicdPipelines: "Azure y DevOps",
+    cicdPipelinesDesc: "Docker, AKS, APIM, Key Vault y Application Insights, desplegados con CI/CD en GitHub Actions",
+    performanceOpt: "Dominio bancario y datos",
+    performanceOptDesc: "Cobro de créditos, deducciones de planilla e integraciones con core bancario en SQL Server y Oracle PL/SQL",
     availability: "Disponibilidad",
     availableFor: "Disponible para",
     fullTimePositions: "Puestos de tiempo completo",
@@ -228,8 +230,7 @@ export default function About() {
               {t(aboutLabels, language, "collabNote")}
             </h4>
             <p className="text-primary-700 dark:text-primary-300">
-              My timezone (UTC-6) is ideal for collaboration with teams across the Americas and Europe. 
-              I&apos;m experienced in remote work and can adapt to various time zones for meetings and project coordination.
+              {t(aboutLabels, language, "collabDesc")}
             </p>
           </div>
         </motion.div>

@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Github, Linkedin, Mail, Calendar, ArrowRight } from "lucide-react"
+import { Github, Linkedin, Mail, Calendar, ArrowRight, BadgeCheck, Download } from "lucide-react"
 import { SocialLink } from "@/types"
 import { useLanguage } from "@/context/LanguageContext"
 import { t, SupportedLanguage, TranslationDict } from "@/lib/utils"
@@ -41,20 +41,20 @@ const getIcon = (iconName: string) => {
 const heroLabels: Record<SupportedLanguage, TranslationDict> = {
   en: {
     name: "Johel Venegas",
-    title: "Computer Systems Engineer",
-    description: "Specializing in backend development, DevOps, and cloud-native architectures",
-    downloadCVSpanish: "Download CV (Spanish)",
-    downloadCVEnglish: "Download CV (English)",
+    title: "Backend Developer | C# .NET & Azure",
+    description: "I build cloud-native microservices on Azure and modernize legacy banking systems for major banks in Costa Rica.",
+    certBadge: "Microsoft Certified: Azure Solutions Architect Expert",
+    downloadCV: "Download CV",
     scheduleCall: "Schedule a Call",
     viewWork: "View My Work",
     basedIn: "Based in Costa Rica • UTC-6",
   },
   es: {
     name: "Johel Venegas",
-    title: "Ingeniero en Sistemas Computacionales",
-    description: "Especializado en desarrollo backend, DevOps y arquitecturas cloud-native",
-    downloadCVSpanish: "Descargar CV (Español)",
-    downloadCVEnglish: "Descargar CV (Inglés)",
+    title: "Desarrollador Backend | C# .NET & Azure",
+    description: "Construyo microservicios cloud-native en Azure y modernizo sistemas bancarios heredados para los principales bancos de Costa Rica.",
+    certBadge: "Microsoft Certified: Azure Solutions Architect Expert",
+    downloadCV: "Descargar CV (inglés)",
     scheduleCall: "Agendar una llamada",
     viewWork: "Ver mi trabajo",
     basedIn: "Con base en Costa Rica • UTC-6",
@@ -150,12 +150,24 @@ export default function Hero() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-lg sm:text-xl text-body mb-8 max-w-3xl mx-auto"
+            className="text-lg sm:text-xl text-body mb-6 max-w-3xl mx-auto"
           >
             {t(heroLabels, language, "description")}
           </motion.p>
 
-          {/* CV Download Buttons */}
+          {/* Certification badge */}
+          <motion.a
+            href="#certifications"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.35 }}
+            className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full border border-primary-300 dark:border-primary-700 bg-primary-50 dark:bg-primary-900/30 text-sm font-medium text-primary-800 dark:text-primary-200 hover:border-primary-500 transition-colors"
+          >
+            <BadgeCheck className="h-4 w-4" />
+            {t(heroLabels, language, "certBadge")}
+          </motion.a>
+
+          {/* CV Download Button */}
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -163,18 +175,12 @@ export default function Hero() {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6"
           >
             <a
-              href="/Johel-Venegas-ATS-G.pdf"
+              href="/Johel-Venegas-CV.pdf"
               download
               className="btn-secondary flex items-center gap-2 group"
             >
-              {t(heroLabels, language, "downloadCVSpanish")}
-            </a>
-            <a
-              href="/Johel-Venegas-ATS-EN.pdf"
-              download
-              className="btn-secondary flex items-center gap-2 group"
-            >
-              {t(heroLabels, language, "downloadCVEnglish")}
+              <Download className="h-5 w-5" />
+              {t(heroLabels, language, "downloadCV")}
             </a>
           </motion.div>
 

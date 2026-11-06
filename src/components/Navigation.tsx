@@ -8,11 +8,11 @@ import { NavigationItem } from "@/types"
 import { t, SupportedLanguage, TranslationDict } from "@/lib/utils"
 
 const navigation: NavigationItem[] = [
-  { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
+  { name: "Experience", href: "#experience" },
+  { name: "Certifications", href: "#certifications" },
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
-  { name: "Experience", href: "#experience" },
   { name: "Contact", href: "#contact" },
 ]
 
@@ -23,6 +23,7 @@ const navLabels: Record<SupportedLanguage, TranslationDict> = {
     Skills: "Skills",
     Projects: "Projects",
     Experience: "Experience",
+    Certifications: "Certifications",
     Contact: "Contact",
   },
   es: {
@@ -31,6 +32,7 @@ const navLabels: Record<SupportedLanguage, TranslationDict> = {
     Skills: "Habilidades",
     Projects: "Proyectos",
     Experience: "Experiencia",
+    Certifications: "Certificaciones",
     Contact: "Contacto",
   },
 }

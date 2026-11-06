@@ -22,6 +22,7 @@ export interface Experience {
   id: string
   title: { en: string; es: string }
   company: string
+  client?: string
   location: string
   startDate: string
   endDate?: string

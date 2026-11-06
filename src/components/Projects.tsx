@@ -8,36 +8,92 @@ import { t, SupportedLanguage, TranslationDict } from "@/lib/utils"
 
 const projects: Project[] = [
   {
-    id: "electronic-invoicing",
+    id: "banking-modernization",
     title: {
-      en: "Central Electronic Invoicing API",
-      es: "API Central de Facturación Electrónica"
+      en: "Legacy Banking App Modernization (.NET 10)",
+      es: "Modernización de App Bancaria Heredada (.NET 10)"
     },
     description: {
-      en: "RESTful API serving 150+ businesses for electronic invoicing compliance with government regulations. Handles tax calculations, secure certificate management, and government API integration.",
-      es: "API RESTful que sirve a más de 150 empresas para el cumplimiento de facturación electrónica con regulaciones gubernamentales. Maneja cálculos de impuestos, gestión segura de certificados y la integración con APIs gubernamentales."
+      en: "Client case study (S-COM). Incremental migration of an ASP.NET MVC/WebForms banking application to .NET 10, where legacy and modernized modules run side by side behind a reverse proxy and ship screen by screen.",
+      es: "Caso de cliente (S-COM). Migración incremental de una aplicación bancaria ASP.NET MVC/WebForms a .NET 10, donde módulos heredados y modernizados conviven detrás de un reverse proxy y se liberan pantalla por pantalla."
     },
-    techStack: ["Python", "FastAPI", "PostgreSQL", "Redis", "Docker", "JWT", "XML/XSD"],
+    techStack: [".NET 10", "C#", "YARP", "Strangler Fig", "SQL Server", "Razor", "DataTables", "SSRS"],
     features: {
       en: [
-        "Multi-tenant architecture supporting 150+ businesses",
-        "Tax calculation engine with government compliance",
-        "Secure P12 certificate system for digital signatures",
-        "Government API integration for invoice validation",
-        "High-performance database optimization",
-        "Automated invoice generation and delivery"
+        "Strangler Fig pattern with YARP routing between legacy and new modules",
+        "Shared authentication bridge: one session across both applications",
+        "Functional parity validated across development, UAT and production",
+        "Team-wide frontend standard for data grids on every migrated screen",
+        "Proof of concept for SSRS reporting on .NET 10"
       ],
       es: [
-        "Arquitectura multi-tenant que soporta más de 150 empresas",
-        "Motor de cálculo de impuestos con cumplimiento gubernamental",
-        "Sistema seguro de certificados P12 para firmas digitales",
-        "Integración con APIs gubernamentales para validación de facturas",
-        "Optimización de base de datos de alto rendimiento",
-        "Generación y entrega automática de facturas"
+        "Patrón Strangler Fig con YARP enrutando entre módulos heredados y nuevos",
+        "Puente de autenticación compartido: una sola sesión en ambas aplicaciones",
+        "Paridad funcional validada en desarrollo, UAT y producción",
+        "Estándar de frontend para grids de datos en todas las pantallas migradas",
+        "Prueba de concepto de reportes SSRS sobre .NET 10"
+      ]
+    },
+    status: "in-progress",
+  },
+  {
+    id: "electronic-invoicing",
+    title: {
+      en: "Electronic Invoicing API for Costa Rica (v4.4)",
+      es: "API de Facturación Electrónica para Costa Rica (v4.4)"
+    },
+    description: {
+      en: "RESTful API compliant with the electronic invoicing requirements of Costa Rica's Ministry of Finance (v4.4): tax calculation, digital signing and automated submissions for multiple tenants.",
+      es: "API RESTful que cumple con los requisitos de facturación electrónica del Ministerio de Hacienda de Costa Rica (v4.4): cálculo de impuestos, firma digital y envíos automáticos para múltiples empresas."
+    },
+    techStack: ["Python", "FastAPI", "PostgreSQL", "Redis", "Celery", "Docker", "Nginx", "JWT", "XML/XSD"],
+    features: {
+      en: [
+        "Tax calculation engine with CABYS validation",
+        "Secure P12 certificate signing system",
+        "Multi-tenant architecture with RBAC",
+        "Contingency mode and automated submissions to the Ministry's API",
+        "Reporting dashboard and automated processing of purchase receipts"
+      ],
+      es: [
+        "Motor de cálculo de impuestos con validación CABYS",
+        "Sistema seguro de firma con certificados P12",
+        "Arquitectura multi-tenant con RBAC",
+        "Modo de contingencia y envíos automáticos a la API de Hacienda",
+        "Dashboard de reportes y procesamiento automático de comprobantes de compra"
       ]
     },
     status: "completed",
     githubUrl: "https://github.com/Johel506/electronic-invoicing-api",
+  },
+  {
+    id: "banking-microservices",
+    title: {
+      en: "Cloud-native Banking Microservices on AKS",
+      es: "Microservicios Bancarios Cloud-native en AKS"
+    },
+    description: {
+      en: "Client case study (S-COM). Atomic and orchestrator microservices in .NET 8/10 for a national bank, deployed to Azure Kubernetes Service and exposed through Azure API Management.",
+      es: "Caso de cliente (S-COM). Microservicios atómicos y orquestadores en .NET 8/10 para un banco nacional, desplegados en Azure Kubernetes Service y expuestos mediante Azure API Management."
+    },
+    techStack: [".NET 8", "Dapr", "EF Core", "Dapper", "Polly", "Docker", "AKS", "APIM", "GitHub Actions"],
+    features: {
+      en: [
+        "Multi-database data access: SQL Server via EF Core, Oracle via Dapper",
+        "Service-to-service communication with Dapr",
+        "Retry and circuit breaker resilience with Polly",
+        "CI/CD with GitHub Actions to AKS",
+        "Production telemetry with Application Insights"
+      ],
+      es: [
+        "Acceso a datos multi-base: SQL Server con EF Core, Oracle con Dapper",
+        "Comunicación entre servicios con Dapr",
+        "Resiliencia con retry y circuit breaker usando Polly",
+        "CI/CD con GitHub Actions hacia AKS",
+        "Telemetría de producción con Application Insights"
+      ]
+    },
+    status: "completed",
   },
   {
     id: "devops-playground",
@@ -46,61 +102,26 @@ const projects: Project[] = [
       es: "DevOps Playground"
     },
     description: {
-      en: "Production-ready CI/CD pipeline for Python microservices with comprehensive monitoring, logging, and infrastructure automation. Designed for scalable deployment workflows.",
-      es: "Pipeline CI/CD listo para producción para microservicios Python con monitoreo, logging e infraestructura automatizada. Diseñado para flujos de despliegue escalables."
+      en: "Personal lab: CI/CD pipeline for containerized Python microservices with monitoring and infrastructure automation.",
+      es: "Laboratorio personal: pipeline CI/CD para microservicios Python contenerizados con monitoreo y automatización de infraestructura."
     },
     techStack: ["Docker", "GitHub Actions", "AWS", "Prometheus", "Grafana", "Terraform"],
     features: {
       en: [
         "Automated deployment pipeline with GitHub Actions",
-        "Containerized microservices architecture",
-        "Infrastructure monitoring with Prometheus & Grafana",
-        "Centralized logging and error tracking",
-        "Infrastructure as Code with Terraform",
-        "Multi-environment deployment strategy"
+        "Containerized microservices",
+        "Monitoring with Prometheus & Grafana",
+        "Infrastructure as Code with Terraform"
       ],
       es: [
         "Pipeline de despliegue automatizado con GitHub Actions",
-        "Arquitectura de microservicios contenerizados",
-        "Monitoreo de infraestructura con Prometheus y Grafana",
-        "Logging centralizado y seguimiento de errores",
-        "Infraestructura como código con Terraform",
-        "Estrategia de despliegue multi-entorno"
+        "Microservicios contenerizados",
+        "Monitoreo con Prometheus y Grafana",
+        "Infraestructura como código con Terraform"
       ]
     },
     status: "completed",
     githubUrl: "https://github.com/Johel506/devops-playground",
-  },
-  {
-    id: "enterprise-modernization",
-    title: {
-      en: "Enterprise System Modernization",
-      es: "Modernización de Sistemas Empresariales"
-    },
-    description: {
-      en: "Migration of legacy Oracle Forms applications to modern Java architecture. Improved performance, maintainability, and user experience while preserving business logic.",
-      es: "Migración de aplicaciones heredadas de Oracle Forms a arquitectura moderna en Java. Mejoras en rendimiento, mantenibilidad y experiencia de usuario, preservando la lógica de negocio."
-    },
-    techStack: ["Java", "Jakarta EE", "JSF", "JPA", "EJB", "CDI", "PL/SQL"],
-    features: {
-      en: [
-        "Legacy Oracle Forms to Java migration",
-        "Database query optimization and performance tuning",
-        "Business logic adaptation and modernization",
-        "Enhanced user interface with JSF",
-        "Improved system maintainability",
-        "Reduced technical debt"
-      ],
-      es: [
-        "Migración de Oracle Forms heredado a Java",
-        "Optimización de consultas y ajuste de rendimiento de base de datos",
-        "Adaptación y modernización de lógica de negocio",
-        "Interfaz de usuario mejorada con JSF",
-        "Mejoras en la mantenibilidad del sistema",
-        "Reducción de deuda técnica"
-      ]
-    },
-    status: "completed",
   },
 ]
 
@@ -125,21 +146,31 @@ const getStatusIcon = (status: Project["status"]) => {
 const projectsLabels: Record<SupportedLanguage, TranslationDict> = {
   en: {
     featured: "Featured Projects",
-    showcase: "A showcase of my recent work in backend development, DevOps, and system modernization",
+    showcase: "Selected work in .NET microservices, legacy modernization and backend APIs",
     techStack: "Tech Stack",
     interested: "Interested in working together?",
     contact: "I'm always open to discussing new opportunities and interesting projects. Let's connect and explore how we can work together to bring your ideas to life.",
     getInTouch: "Get in Touch",
     viewMore: "View More on GitHub",
+    keyFeatures: "Key Features",
+    completed: "Completed",
+    "in-progress": "In progress",
+    planned: "Planned",
+    technologies: "technologies",
   },
   es: {
     featured: "Proyectos Destacados",
-    showcase: "Una muestra de mi trabajo reciente en desarrollo backend, DevOps y modernización de sistemas",
+    showcase: "Trabajo seleccionado en microservicios .NET, modernización de sistemas heredados y APIs backend",
     techStack: "Tecnologías",
     interested: "¿Interesado en trabajar juntos?",
     contact: "Siempre estoy abierto a discutir nuevas oportunidades y proyectos interesantes. Conectemos y exploremos cómo podemos trabajar juntos para hacer realidad tus ideas.",
     getInTouch: "Contáctame",
     viewMore: "Ver más en GitHub",
+    keyFeatures: "Características clave",
+    completed: "Completado",
+    "in-progress": "En curso",
+    planned: "Planeado",
+    technologies: "tecnologías",
   },
 }
 
@@ -181,7 +212,7 @@ export default function Projects() {
                   </h3>
                   <div className="flex items-center gap-2">
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
-                      {getStatusIcon(project.status)} {project.status}
+                      {getStatusIcon(project.status)} {t(projectsLabels, language, project.status ?? "completed")}
                     </span>
                   </div>
                 </div>
@@ -237,7 +268,7 @@ export default function Projects() {
               <div>
                 <h4 className="text-sm font-semibold text-heading mb-3 flex items-center gap-2">
                   <Database className="h-4 w-4" />
-                  Key Features
+                  {t(projectsLabels, language, "keyFeatures")}
                 </h4>
                 <ul className="space-y-2">
                   {(project.features[language] || project.features['en'] || []).map((feature: string) => (
@@ -255,13 +286,12 @@ export default function Projects() {
                   <div className="flex items-center gap-1">
                     <Calendar className="h-4 w-4" />
                     <span>
-                      {project.status === "completed" ? "Completed" : 
-                       project.status === "in-progress" ? "In Progress" : "Planned"}
+                      {t(projectsLabels, language, project.status ?? "completed")}
                     </span>
                   </div>
                   <div className="flex items-center gap-1">
                     <Cloud className="h-4 w-4" />
-                    <span>{project.techStack.length} technologies</span>
+                    <span>{project.techStack.length} {t(projectsLabels, language, "technologies")}</span>
                   </div>
                 </div>
               </div>

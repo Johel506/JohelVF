@@ -11,24 +11,41 @@ const inter = Inter({
   weight: ["400", "500", "600", "700"],
 });
 
+const SITE_URL = "https://johel.dev";
+const TITLE = "Johel Venegas | Backend Developer · C# .NET & Azure";
+const DESCRIPTION =
+  "Backend Developer in Costa Rica building cloud-native .NET microservices on Azure and modernizing legacy banking systems. Microsoft Certified Azure Solutions Architect Expert.";
+
 export const metadata: Metadata = {
-  title: "Johel Venegas",
-  description: "Professional portfolio of Johel Venegas.",
-  keywords: ["Johel Venegas", "Portfolio", "Backend Developer", "DevOps Engineer", "Costa Rica"],
-  authors: [{ name: "Johel Venegas" }],
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  keywords: [
+    "Johel Venegas",
+    "Backend Developer",
+    "C#",
+    ".NET",
+    "Azure",
+    "Azure Solutions Architect Expert",
+    "Microservices",
+    "AKS",
+    "Costa Rica",
+  ],
+  authors: [{ name: "Johel Venegas", url: SITE_URL }],
   creator: "Johel Venegas",
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://johelvenegas.com",
-    title: "Johel Venegas",
-    description: "Professional portfolio of Johel Venegas.",
-    siteName: "Johel Venegas Portfolio",
+    url: SITE_URL,
+    title: TITLE,
+    description: DESCRIPTION,
+    siteName: "Johel Venegas",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Johel Venegas",
-    description: "Professional portfolio of Johel Venegas.",
+    title: TITLE,
+    description: DESCRIPTION,
   },
   robots: {
     index: true,
@@ -40,9 +57,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  verification: {
-    google: "your-google-verification-code",
   },
 };
 

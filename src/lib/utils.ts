@@ -5,11 +5,16 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatDate(date: string | Date) {
-  return new Intl.DateTimeFormat("en-US", {
-    month: "long",
+// Accepts "YYYY-MM" strings. Parsed as a local date so a UTC-6 visitor
+// doesn't see "2025-01" rendered as December 2024.
+export function formatDate(date: string | Date, lang: "en" | "es" = "en") {
+  const d = typeof date === "string"
+    ? new Date(Number(date.slice(0, 4)), Number(date.slice(5, 7) || "1") - 1, 1)
+    : date
+  return new Intl.DateTimeFormat(lang === "es" ? "es-CR" : "en-US", {
+    month: "short",
     year: "numeric",
-  }).format(new Date(date))
+  }).format(d)
 }
 
 export function scrollToSection(sectionId: string) {

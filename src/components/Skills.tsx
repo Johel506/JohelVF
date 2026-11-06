@@ -1,108 +1,99 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Code, Database, Cloud, Zap, Layers, Library, Monitor } from "lucide-react"
+import { Code, Database, Cloud, Zap, Layers, Monitor } from "lucide-react"
 import { Skill } from "@/types"
 import { useLanguage } from "@/context/LanguageContext"
 import { t, SupportedLanguage, TranslationDict } from "@/lib/utils"
 
+// Mirrors the SKILLS section of the CV (Nov 2026)
 const skills: Skill[] = [
-  // Backend Development
-  { id: "python", name: "Python", category: "backend" },
-  { id: "java", name: "Java", category: "backend" },
+  // Languages
   { id: "csharp", name: "C#", category: "backend" },
-  { id: "jakarta", name: "Jakarta EE", category: "backend" },
-  { id: "rest", name: "RESTful APIs", category: "backend" },
-  { id: "microservices", name: "Microservices", category: "backend" },
-  // DevOps & Cloud
+  { id: "sql", name: "SQL", category: "backend" },
+  { id: "java", name: "Java", category: "backend" },
+  { id: "python", name: "Python", category: "backend" },
+  { id: "bash", name: "Bash", category: "backend" },
+  // Backend & Architecture
+  { id: "aspnetcore", name: "ASP.NET Core (.NET 8 / 10)", category: "frameworks" },
+  { id: "aspnetmvc", name: "ASP.NET MVC", category: "frameworks" },
+  { id: "rest", name: "REST APIs", category: "frameworks" },
+  { id: "microservices", name: "Microservices", category: "frameworks" },
+  { id: "dapr", name: "Dapr", category: "frameworks" },
+  { id: "yarp", name: "YARP", category: "frameworks" },
+  { id: "strangler", name: "Strangler Fig pattern", category: "frameworks" },
+  { id: "efcore", name: "EF Core", category: "frameworks" },
+  { id: "dapper", name: "Dapper", category: "frameworks" },
+  { id: "polly", name: "Polly", category: "frameworks" },
+  { id: "jwt", name: "JWT / OAuth", category: "frameworks" },
+  // Cloud & DevOps
+  { id: "aks", name: "Azure Kubernetes Service", category: "devops" },
+  { id: "apim", name: "Azure API Management", category: "devops" },
+  { id: "entra", name: "Microsoft Entra ID", category: "devops" },
+  { id: "keyvault", name: "Azure Key Vault", category: "devops" },
+  { id: "appinsights", name: "Application Insights", category: "devops" },
   { id: "docker", name: "Docker", category: "devops" },
-  { id: "kubernetes", name: "Kubernetes", category: "devops" },
-  { id: "aws", name: "AWS", category: "devops" },
   { id: "github-actions", name: "GitHub Actions", category: "devops" },
-  { id: "terraform", name: "Terraform", category: "devops" },
-  { id: "prometheus", name: "Prometheus", category: "devops" },
-  { id: "grafana", name: "Grafana", category: "devops" },
-  // Database
+  { id: "git", name: "Git", category: "devops" },
+  { id: "aws", name: "AWS (EC2, S3, IAM)", category: "devops" },
+  { id: "nginx", name: "Nginx", category: "devops" },
+  { id: "linux", name: "Linux", category: "devops" },
+  // Databases
+  { id: "sqlserver", name: "SQL Server", category: "database" },
+  { id: "oracle", name: "Oracle PL/SQL", category: "database" },
   { id: "postgresql", name: "PostgreSQL", category: "database" },
   { id: "mysql", name: "MySQL", category: "database" },
-  { id: "sqlserver", name: "SQL Server", category: "database" },
-  { id: "mongodb", name: "MongoDB", category: "database" },
-  { id: "firebase-realtime", name: "Firebase Realtime Database", category: "database" },
-  { id: "cloud-firestore", name: "Cloud Firestore", category: "database" },
   { id: "redis", name: "Redis", category: "database" },
-  { id: "plsql", name: "PL/SQL", category: "database" },
-  // Additional Technologies
-  { id: "jwt", name: "JWT", category: "other" },
-  { id: "xml", name: "XML/XSD", category: "other" },
-  { id: "nginx", name: "Nginx", category: "other" },
-  { id: "linux", name: "Linux", category: "other" },
-  { id: "celery", name: "Celery", category: "other" },
-  // Frontend
-  { id: "react", name: "React", category: "frontend" },
-  { id: "nextjs", name: "Next.js", category: "frontend" },
-  { id: "typescript", name: "TypeScript", category: "frontend" },
-  { id: "tailwind", name: "Tailwind CSS", category: "frontend" },
-  { id: "html", name: "HTML5", category: "frontend" },
-  { id: "css", name: "CSS3", category: "frontend" },
+  // Frontend & Reporting
+  { id: "razor", name: "Razor", category: "frontend" },
   { id: "javascript", name: "JavaScript", category: "frontend" },
-  // Frameworks
-  { id: "spring", name: "Spring", category: "frameworks" },
-  { id: "hibernate", name: "Hibernate", category: "frameworks" },
-  { id: "primefaces", name: "PrimeFaces", category: "frameworks" },
-  { id: "swagger", name: "Swagger", category: "frameworks" },
-  { id: "flask", name: "Flask", category: "frameworks" },
-  { id: "django", name: "Django", category: "frameworks" },
-  { id: "entityframework", name: "Entity Framework", category: "frameworks" },
-  { id: "dotnet", name: ".NET", category: "frameworks" },
-  { id: "aspnetcore", name: "ASP.NET Core", category: "frameworks" },
-  // Libraries
-  { id: "langchain", name: "LangChain", category: "libraries" },
-  { id: "pandas", name: "Pandas", category: "libraries" },
-  { id: "numpy", name: "NumPy", category: "libraries" },
-  { id: "requests", name: "Requests", category: "libraries" },
-  { id: "axios", name: "Axios", category: "libraries" },
+  { id: "jquery", name: "jQuery", category: "frontend" },
+  { id: "datatables", name: "DataTables", category: "frontend" },
+  { id: "ssrs", name: "SSRS", category: "frontend" },
+  // Other frameworks & tools
+  { id: "fastapi", name: "FastAPI", category: "other" },
+  { id: "spring", name: "Spring Boot", category: "other" },
+  { id: "jakarta", name: "Jakarta EE", category: "other" },
+  { id: "celery", name: "Celery", category: "other" },
+  { id: "postman", name: "Postman", category: "other" },
+  { id: "grafana", name: "Grafana", category: "other" },
+  { id: "xml", name: "XML/XSD", category: "other" },
 ];
 
 const categories = [
   {
     id: "backend",
-    name: "Backend Development",
+    name: { en: "Languages", es: "Lenguajes" },
     color: "primary",
     icon: <Code className="h-5 w-5" />,
   },
   {
+    id: "frameworks",
+    name: { en: "Backend & Architecture", es: "Backend y Arquitectura" },
+    color: "yellow",
+    icon: <Layers className="h-5 w-5" />,
+  },
+  {
     id: "devops",
-    name: "DevOps & Cloud",
+    name: { en: "Cloud & DevOps", es: "Cloud y DevOps" },
     color: "blue",
     icon: <Cloud className="h-5 w-5" />,
   },
   {
     id: "database",
-    name: "Database",
+    name: { en: "Databases", es: "Bases de datos" },
     color: "green",
     icon: <Database className="h-5 w-5" />,
   },
   {
     id: "frontend",
-    name: "Frontend",
+    name: { en: "Frontend & Reporting", es: "Frontend y Reportes" },
     color: "pink",
     icon: <Monitor className="h-5 w-5" />,
   },
   {
-    id: "frameworks",
-    name: "Frameworks",
-    color: "yellow",
-    icon: <Layers className="h-5 w-5" />,
-  },
-  {
-    id: "libraries",
-    name: "Libraries",
-    color: "orange",
-    icon: <Library className="h-5 w-5" />,
-  },
-  {
     id: "other",
-    name: "Additional Technologies",
+    name: { en: "Other Frameworks & Tools", es: "Otros frameworks y herramientas" },
     color: "purple",
     icon: <Zap className="h-5 w-5" />,
   },
@@ -180,7 +171,7 @@ export default function Skills() {
               >
                 <div className="flex items-center gap-3 mb-6">
                   <div className={`${getCategoryColor(category.color)}`}>{category.icon}</div>
-                  <h3 className={`text-2xl font-semibold ${getCategoryColor(category.color)}`}>{category.name}</h3>
+                  <h3 className={`text-2xl font-semibold ${getCategoryColor(category.color)}`}>{category.name[language]}</h3>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                   {categorySkills.map((skill) => (
@@ -196,46 +187,6 @@ export default function Skills() {
             )
           })}
 
-          {/* Skills Summary */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="mt-16"
-          >
-            <div className="rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm p-8">
-              <h3 className="text-xl font-semibold text-heading mb-6 text-center">
-                Technology Stack Overview
-              </h3>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">
-                    {skills.filter(s => s.category === "backend").length}
-                  </div>
-                  <div className="text-sm text-body">Backend Technologies</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                    {skills.filter(s => s.category === "devops").length}
-                  </div>
-                  <div className="text-sm text-body">DevOps & Cloud</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">
-                    {skills.filter(s => s.category === "database").length}
-                  </div>
-                  <div className="text-sm text-body">Database Systems</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">
-                    {skills.filter(s => s.category === "other").length}
-                  </div>
-                  <div className="text-sm text-body">Additional Tools</div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>
