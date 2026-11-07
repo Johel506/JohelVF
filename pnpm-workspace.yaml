@@ -1,0 +1,13 @@
+# pnpm supply-chain hardening
+
+# Don't install package versions published less than 3 days ago
+# (most malicious releases are caught and pulled within hours).
+minimumReleaseAge: 4320
+
+# Dependency install scripts are blocked unless listed here as true.
+# These three only fetch prebuilt binaries that already ship as
+# optional platform packages, so they stay disabled.
+allowBuilds:
+  "@parcel/watcher": false
+  "@tailwindcss/oxide": false
+  unrs-resolver: false
