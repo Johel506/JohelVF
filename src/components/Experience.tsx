@@ -22,18 +22,18 @@ const experiences: ExperienceType[] = [
     current: true,
     description: {
       en: [
-        "Migrating a legacy ASP.NET MVC/WebForms banking application to .NET 10 incrementally, using the Strangler Fig pattern with YARP as reverse proxy so legacy and modernized modules coexist and ship screen by screen without service interruption",
-        "Implemented a shared authentication bridge that keeps a single user session across the legacy and the modernized application",
         "Attend production incidents and defects on an employer agreements and payroll-deduction system integrated with the core banking platform, from root-cause analysis to the fix across stored procedures, business logic and UI",
         "Develop and maintain business logic for loan collections, employer agreements and payment inconsistency handling on SQL Server",
+        "In parallel with support and development work, contribute to the incremental migration of the legacy ASP.NET MVC/WebForms application to .NET 10, using the Strangler Fig pattern with YARP as reverse proxy so legacy and modernized modules coexist and ship screen by screen without service interruption",
+        "Implemented a shared authentication bridge that keeps a single user session across the legacy and the modernized application",
         "Document each legacy module before migrating it and validate functional parity across development, UAT and production",
         "Defined, together with the team, the frontend standard for data grids adopted across all migrated screens, and built a proof of concept for SSRS reporting on .NET 10"
       ],
       es: [
-        "Migro de forma incremental una aplicación bancaria heredada ASP.NET MVC/WebForms a .NET 10 con el patrón Strangler Fig y YARP como reverse proxy, para que módulos heredados y modernizados convivan y se liberen pantalla por pantalla sin interrupción del servicio",
-        "Implementé un puente de autenticación compartido que mantiene una única sesión de usuario entre la aplicación heredada y la modernizada",
         "Atiendo incidentes y defectos en producción de un sistema de convenios patronales y deducciones de planilla integrado con el core bancario, desde el análisis de causa raíz hasta la corrección en procedimientos almacenados, lógica de negocio e interfaz",
         "Desarrollo y mantengo lógica de negocio para cobro de créditos, convenios patronales y manejo de inconsistencias de pago en SQL Server",
+        "En paralelo al soporte y desarrollo, contribuyo a la migración incremental de la aplicación heredada ASP.NET MVC/WebForms a .NET 10 con el patrón Strangler Fig y YARP como reverse proxy, para que módulos heredados y modernizados convivan y se liberen pantalla por pantalla sin interrupción del servicio",
+        "Implementé un puente de autenticación compartido que mantiene una única sesión de usuario entre la aplicación heredada y la modernizada",
         "Documento el comportamiento de cada módulo heredado antes de migrarlo y valido la paridad funcional en desarrollo, UAT y producción",
         "Definí junto al equipo el estándar de frontend para grids de datos adoptado en todas las pantallas migradas, y construí una prueba de concepto de reportes SSRS sobre .NET 10"
       ]

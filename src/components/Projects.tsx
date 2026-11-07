@@ -8,35 +8,6 @@ import { t, SupportedLanguage, TranslationDict } from "@/lib/utils"
 
 const projects: Project[] = [
   {
-    id: "banking-modernization",
-    title: {
-      en: "Legacy Banking App Modernization (.NET 10)",
-      es: "Modernización de App Bancaria Heredada (.NET 10)"
-    },
-    description: {
-      en: "Client case study (S-COM). Incremental migration of an ASP.NET MVC/WebForms banking application to .NET 10, where legacy and modernized modules run side by side behind a reverse proxy and ship screen by screen.",
-      es: "Caso de cliente (S-COM). Migración incremental de una aplicación bancaria ASP.NET MVC/WebForms a .NET 10, donde módulos heredados y modernizados conviven detrás de un reverse proxy y se liberan pantalla por pantalla."
-    },
-    techStack: [".NET 10", "C#", "YARP", "Strangler Fig", "SQL Server", "Razor", "DataTables", "SSRS"],
-    features: {
-      en: [
-        "Strangler Fig pattern with YARP routing between legacy and new modules",
-        "Shared authentication bridge: one session across both applications",
-        "Functional parity validated across development, UAT and production",
-        "Team-wide frontend standard for data grids on every migrated screen",
-        "Proof of concept for SSRS reporting on .NET 10"
-      ],
-      es: [
-        "Patrón Strangler Fig con YARP enrutando entre módulos heredados y nuevos",
-        "Puente de autenticación compartido: una sola sesión en ambas aplicaciones",
-        "Paridad funcional validada en desarrollo, UAT y producción",
-        "Estándar de frontend para grids de datos en todas las pantallas migradas",
-        "Prueba de concepto de reportes SSRS sobre .NET 10"
-      ]
-    },
-    status: "in-progress",
-  },
-  {
     id: "electronic-invoicing",
     title: {
       en: "Electronic Invoicing API for Costa Rica (v4.4)",
@@ -65,35 +36,6 @@ const projects: Project[] = [
     },
     status: "completed",
     githubUrl: "https://github.com/Johel506/electronic-invoicing-api",
-  },
-  {
-    id: "banking-microservices",
-    title: {
-      en: "Cloud-native Banking Microservices on AKS",
-      es: "Microservicios Bancarios Cloud-native en AKS"
-    },
-    description: {
-      en: "Client case study (S-COM). Atomic and orchestrator microservices in .NET 8/10 for a national bank, deployed to Azure Kubernetes Service and exposed through Azure API Management.",
-      es: "Caso de cliente (S-COM). Microservicios atómicos y orquestadores en .NET 8/10 para un banco nacional, desplegados en Azure Kubernetes Service y expuestos mediante Azure API Management."
-    },
-    techStack: [".NET 8", "Dapr", "EF Core", "Dapper", "Polly", "Docker", "AKS", "APIM", "GitHub Actions"],
-    features: {
-      en: [
-        "Multi-database data access: SQL Server via EF Core, Oracle via Dapper",
-        "Service-to-service communication with Dapr",
-        "Retry and circuit breaker resilience with Polly",
-        "CI/CD with GitHub Actions to AKS",
-        "Production telemetry with Application Insights"
-      ],
-      es: [
-        "Acceso a datos multi-base: SQL Server con EF Core, Oracle con Dapper",
-        "Comunicación entre servicios con Dapr",
-        "Resiliencia con retry y circuit breaker usando Polly",
-        "CI/CD con GitHub Actions hacia AKS",
-        "Telemetría de producción con Application Insights"
-      ]
-    },
-    status: "completed",
   },
   {
     id: "devops-playground",
@@ -145,8 +87,8 @@ const getStatusIcon = (status: Project["status"]) => {
 
 const projectsLabels: Record<SupportedLanguage, TranslationDict> = {
   en: {
-    featured: "Featured Projects",
-    showcase: "Selected work in .NET microservices, legacy modernization and backend APIs",
+    featured: "Personal Projects",
+    showcase: "Products and labs I built on my own, outside client work",
     techStack: "Tech Stack",
     interested: "Interested in working together?",
     contact: "I'm always open to discussing new opportunities and interesting projects. Let's connect and explore how we can work together to bring your ideas to life.",
@@ -159,8 +101,8 @@ const projectsLabels: Record<SupportedLanguage, TranslationDict> = {
     technologies: "technologies",
   },
   es: {
-    featured: "Proyectos Destacados",
-    showcase: "Trabajo seleccionado en microservicios .NET, modernización de sistemas heredados y APIs backend",
+    featured: "Proyectos personales",
+    showcase: "Productos y laboratorios que construí por mi cuenta, fuera del trabajo con clientes",
     techStack: "Tecnologías",
     interested: "¿Interesado en trabajar juntos?",
     contact: "Siempre estoy abierto a discutir nuevas oportunidades y proyectos interesantes. Conectemos y exploremos cómo podemos trabajar juntos para hacer realidad tus ideas.",

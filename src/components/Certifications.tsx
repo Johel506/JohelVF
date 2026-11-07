@@ -57,13 +57,22 @@ const certifications: Certification[] = [
     featured: true,
   },
   {
+    id: "dp700",
+    code: "DP-700",
+    name: "Fabric Data Engineer Associate",
+    issuer: "Microsoft",
+    level: "associate",
+    status: "scheduled",
+    scheduled: "2026-11",
+  },
+  {
     id: "az400",
     code: "AZ-400",
     name: "DevOps Engineer Expert",
     issuer: "Microsoft",
     level: "expert",
     status: "scheduled",
-    scheduled: "2026-11",
+    scheduled: "2027-01",
   },
   { id: "depc", name: "DevOps Essentials Professional Certification (DEPC)", issuer: "CertiProf", level: "professional", status: "earned" },
   { id: "sfpc", name: "Scrum Foundation Professional Certification (SFPC)", issuer: "CertiProf", level: "professional", status: "earned" },
@@ -80,7 +89,7 @@ const levelStyles: Record<Level, string> = {
 const certLabels: Record<SupportedLanguage, TranslationDict> = {
   en: {
     title: "Certifications",
-    subtitle: "Verified credentials in Azure architecture, administration and DevOps",
+    subtitle: "Verified credentials in Azure architecture and administration, with data engineering and DevOps next",
     earned: "Earned",
     verify: "Verify credential",
     scheduled: "Exam scheduled",
@@ -92,7 +101,7 @@ const certLabels: Record<SupportedLanguage, TranslationDict> = {
   },
   es: {
     title: "Certificaciones",
-    subtitle: "Credenciales verificables en arquitectura, administración y DevOps en Azure",
+    subtitle: "Credenciales verificables en arquitectura y administración de Azure, con ingeniería de datos y DevOps en camino",
     earned: "Obtenida",
     verify: "Verificar credencial",
     scheduled: "Examen programado",
@@ -127,7 +136,7 @@ export default function Certifications() {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {featured.map((cert, index) => {
             const isScheduled = cert.status === "scheduled"
             return (
